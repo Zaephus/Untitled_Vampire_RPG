@@ -8,12 +8,14 @@ public class Weapon : MonoBehaviour {
     private GameObject swoosh;
 
     [SerializeField]
+    private int attackDamage;
+    [SerializeField]
     private float attackDuration;
     [SerializeField]
     private float attackRange;
 
     public void OnStart() {
-
+        swoosh.GetComponent<Hitbox>().Initialize(attackDamage);
     }
 
     public void OnUpdate() {

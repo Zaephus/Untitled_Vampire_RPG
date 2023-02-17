@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
     private void Start() {
         body = GetComponent<Rigidbody2D>();
         weapon = GetComponent<Weapon>();
+        weapon.OnStart();
     }
 
     private void Update() {
