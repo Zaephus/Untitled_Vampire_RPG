@@ -5,15 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     [SerializeField]
-    private GameObject swoosh;
-
-    [SerializeField]
     private float moveSpeed;
 
     private float horizontal;
     private float vertical;
 
     private Rigidbody2D body;
+    private Weapon weapon;
 
     private Vector2 velocity;
 
@@ -21,6 +19,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Start() {
         body = GetComponent<Rigidbody2D>();
+        weapon = GetComponent<Weapon>();
     }
 
     private void Update() {
@@ -28,12 +27,13 @@ public class PlayerController : MonoBehaviour {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
 
-        mouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        mouseDir = new Vector3(mouseDir.x, mouseDir.y, 0).normalized;
-
-        swoosh.transform.position = transform.position + mouseDir;
+        mouseDir = InputManager.MousePosition - transform.position;
 
         velocity = new Vector2(horizontal, vertical).normalized * moveSpeed;
+
+        if(weapon != null) {
+            weapon.OnUpdate();
+        }
 
     }
 
